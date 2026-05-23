@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, stripSearchParams, useNavigate } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { useMemo } from "react";
 import { z } from "zod";
@@ -10,13 +10,18 @@ import { MovieRow } from "@/components/landing/movie-row";
 import { SearchBar } from "@/components/landing/search-bar";
 import { getMovies, getMoviesByCategory } from "@/lib/cinema-data";
 
+const INDEX_DEFAULTS = { movies: "", q: "" } as const;
+
 const indexSearchSchema = z.object({
-  movies: fallback(z.string(), "").default(""),
-  q: fallback(z.string(), "").default(""),
+  movies: fallback(z.string(), INDEX_DEFAULTS.movies).default(INDEX_DEFAULTS.movies),
+  q: fallback(z.string(), INDEX_DEFAULTS.q).default(INDEX_DEFAULTS.q),
 });
 
 export const Route = createFileRoute("/")({
   validateSearch: zodValidator(indexSearchSchema),
+  search: {
+    middlewares: [stripSearchParams(INDEX_DEFAULTS)],
+  },
   head: () => ({
     meta: [
       { title: "Cinema Finder — Pick your movies" },
