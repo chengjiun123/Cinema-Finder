@@ -1,0 +1,162 @@
+[
+  {
+    "id": "m_dune_2",
+    "title": "Dune: Part Two",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+    "category": "now_showing",
+    "genres": ["Sci-Fi", "Adventure"],
+    "durationMinutes": 166
+  },
+  {
+    "id": "m_inside_out_2",
+    "title": "Inside Out 2",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+    "category": "now_showing",
+    "genres": ["Animation", "Family"],
+    "durationMinutes": 96
+  },
+  {
+    "id": "m_wicked",
+    "title": "Wicked",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/c5Tqxeo1UpBvnAc3csUm7j3hlQl.jpg",
+    "category": "now_showing",
+    "genres": ["Musical", "Fantasy"],
+    "durationMinutes": 160
+  },
+  {
+    "id": "m_gladiator_2",
+    "title": "Gladiator II",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+    "category": "now_showing",
+    "genres": ["Action", "Drama"],
+    "durationMinutes": 148
+  },
+  {
+    "id": "m_moana_2",
+    "title": "Moana 2",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg",
+    "category": "now_showing",
+    "genres": ["Animation", "Family"],
+    "durationMinutes": 100
+  },
+  {
+    "id": "m_venom_3",
+    "title": "Venom: The Last Dance",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+    "category": "now_showing",
+    "genres": ["Action", "Sci-Fi"],
+    "durationMinutes": 109
+  },
+  {
+    "id": "m_substance",
+    "title": "The Substance",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/lqoMzCcZYEFK729d6qzt349fB4o.jpg",
+    "category": "now_showing",
+    "genres": ["Horror", "Drama"],
+    "durationMinutes": 141
+  },
+  {
+    "id": "m_anora",
+    "title": "Anora",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/iIvQnZyzgx9TkbrOgcXx0p7aLiq.jpg",
+    "category": "now_showing",
+    "genres": ["Drama", "Comedy"],
+    "durationMinutes": 139
+  },
+  {
+    "id": "m_captain_america_4",
+    "title": "Captain America: Brave New World",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
+    "category": "coming_soon",
+    "genres": ["Action", "Sci-Fi"],
+    "durationMinutes": 119
+  },
+  {
+    "id": "m_mickey_17",
+    "title": "Mickey 17",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/edKpE9B5qN3e559OuMCLZdW1iBZ.jpg",
+    "category": "coming_soon",
+    "genres": ["Sci-Fi", "Drama"],
+    "durationMinutes": 137
+  },
+  {
+    "id": "m_thunderbolts",
+    "title": "Thunderbolts*",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/m9EtP1Yrzv6v7dMaC9mRaGhd1um.jpg",
+    "category": "coming_soon",
+    "genres": ["Action", "Adventure"],
+    "durationMinutes": 126
+  },
+  {
+    "id": "m_minecraft",
+    "title": "A Minecraft Movie",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg",
+    "category": "coming_soon",
+    "genres": ["Family", "Adventure"],
+    "durationMinutes": 101
+  },
+  {
+    "id": "m_fantastic_four",
+    "title": "The Fantastic Four: First Steps",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/x26MtUlwtWD26d0G0FXcppxCJio.jpg",
+    "category": "coming_soon",
+    "genres": ["Action", "Sci-Fi"],
+    "durationMinutes": 120
+  },
+  {
+    "id": "m_mission_impossible_8",
+    "title": "Mission: Impossible — The Final Reckoning",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/8sJI8xgglmGFhVl7QnSE4USJtCV.jpg",
+    "category": "coming_soon",
+    "genres": ["Action", "Thriller"],
+    "durationMinutes": 169
+  },
+  {
+    "id": "m_oppenheimer",
+    "title": "Oppenheimer",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+    "category": "popular",
+    "genres": ["Drama", "History"],
+    "durationMinutes": 180
+  },
+  {
+    "id": "m_barbie",
+    "title": "Barbie",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
+    "category": "popular",
+    "genres": ["Comedy", "Fantasy"],
+    "durationMinutes": 114
+  },
+  {
+    "id": "m_spider_verse_2",
+    "title": "Spider-Man: Across the Spider-Verse",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+    "category": "popular",
+    "genres": ["Animation", "Action"],
+    "durationMinutes": 140
+  },
+  {
+    "id": "m_avatar_2",
+    "title": "Avatar: The Way of Water",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+    "category": "popular",
+    "genres": ["Sci-Fi", "Adventure"],
+    "durationMinutes": 192
+  },
+  {
+    "id": "m_top_gun_maverick",
+    "title": "Top Gun: Maverick",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+    "category": "popular",
+    "genres": ["Action", "Drama"],
+    "durationMinutes": 130
+  },
+  {
+    "id": "m_everything_everywhere",
+    "title": "Everything Everywhere All at Once",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+    "category": "popular",
+    "genres": ["Sci-Fi", "Drama"],
+    "durationMinutes": 139
+  }
+]
