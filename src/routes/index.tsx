@@ -61,9 +61,11 @@ function LandingPage() {
     [query],
   );
 
+  type IndexSearch = z.infer<typeof indexSearchSchema>;
+
   const setSelection = (next: Set<string>) => {
     navigate({
-      search: (prev) => ({ ...prev, movies: serializeMovieIds([...next]) }),
+      search: (prev: IndexSearch) => ({ ...prev, movies: serializeMovieIds([...next]) }),
       replace: true,
     });
   };
@@ -76,7 +78,7 @@ function LandingPage() {
   };
 
   const handleSearchChange = (q: string) => {
-    navigate({ search: (prev) => ({ ...prev, q }), replace: true });
+    navigate({ search: (prev: IndexSearch) => ({ ...prev, q }), replace: true });
   };
 
   const handleFindCinemas = () => {
