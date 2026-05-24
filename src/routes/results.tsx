@@ -118,6 +118,12 @@ function ResultsPage() {
 }
 
 function CinemaList({ group }: { group: CinemaGroup }) {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setExpandedId(null);
+  }, [group.movieId]);
+
   if (group.cinemas.length === 0) {
     return (
       <div className="rounded-2xl bg-surface-elevated px-4 py-6 text-center text-sm text-muted-foreground">
@@ -125,6 +131,10 @@ function CinemaList({ group }: { group: CinemaGroup }) {
       </div>
     );
   }
+
+  const handleToggle = (id: string) => {
+    setExpandedId((cur) => (cur === id ? null : id));
+  };
 
   return (
     <div className="space-y-2.5">
@@ -137,7 +147,13 @@ function CinemaList({ group }: { group: CinemaGroup }) {
         </div>
       )}
       {group.cinemas.map((cinema, idx) => (
-        <CinemaCard key={cinema.id} cinema={cinema} rank={idx + 1} />
+        <CinemaCard
+          key={cinema.id}
+          cinema={cinema}
+          rank={idx + 1}
+          isExpanded={expandedId === cinema.id}
+          onToggle={handleToggle}
+        />
       ))}
     </div>
   );
