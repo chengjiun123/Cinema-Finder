@@ -14,16 +14,205 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cinemas: {
+        Row: {
+          address: string
+          base_price: number
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          latitude: number
+          longitude: number
+          name: string
+          photo_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          base_price?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          latitude: number
+          longitude: number
+          name: string
+          photo_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          base_price?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          latitude?: number
+          longitude?: number
+          name?: string
+          photo_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      movies: {
+        Row: {
+          backdrop_url: string | null
+          category: Database["public"]["Enums"]["movie_category"]
+          created_at: string
+          duration_minutes: number | null
+          genres: string[]
+          id: string
+          overview: string | null
+          poster_url: string | null
+          release_date: string | null
+          synced_at: string
+          title: string
+          tmdb_id: number
+          tmdb_popularity: number | null
+          updated_at: string
+        }
+        Insert: {
+          backdrop_url?: string | null
+          category: Database["public"]["Enums"]["movie_category"]
+          created_at?: string
+          duration_minutes?: number | null
+          genres?: string[]
+          id?: string
+          overview?: string | null
+          poster_url?: string | null
+          release_date?: string | null
+          synced_at?: string
+          title: string
+          tmdb_id: number
+          tmdb_popularity?: number | null
+          updated_at?: string
+        }
+        Update: {
+          backdrop_url?: string | null
+          category?: Database["public"]["Enums"]["movie_category"]
+          created_at?: string
+          duration_minutes?: number | null
+          genres?: string[]
+          id?: string
+          overview?: string | null
+          poster_url?: string | null
+          release_date?: string | null
+          synced_at?: string
+          title?: string
+          tmdb_id?: number
+          tmdb_popularity?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      showtimes: {
+        Row: {
+          cinema_id: string
+          created_at: string
+          id: string
+          movie_id: string
+          price: number | null
+          screen_label: string | null
+          starts_at: string
+          updated_at: string
+        }
+        Insert: {
+          cinema_id: string
+          created_at?: string
+          id?: string
+          movie_id: string
+          price?: number | null
+          screen_label?: string | null
+          starts_at: string
+          updated_at?: string
+        }
+        Update: {
+          cinema_id?: string
+          created_at?: string
+          id?: string
+          movie_id?: string
+          price?: number | null
+          screen_label?: string | null
+          starts_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "showtimes_cinema_id_fkey"
+            columns: ["cinema_id"]
+            isOneToOne: false
+            referencedRelation: "cinemas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "showtimes_movie_id_fkey"
+            columns: ["movie_id"]
+            isOneToOne: false
+            referencedRelation: "movies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      movie_category: "now_showing" | "coming_soon" | "popular"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +339,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      movie_category: ["now_showing", "coming_soon", "popular"],
+    },
   },
 } as const
