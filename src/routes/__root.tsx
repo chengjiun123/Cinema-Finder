@@ -80,6 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Pick the movies you want to watch and instantly see nearby cinemas sorted by distance and price.",
       },
+      { property: "og:title", content: "Cinema Finder — Find the best cinema for tonight" },
+      { name: "twitter:title", content: "Cinema Finder — Find the best cinema for tonight" },
+      { name: "description", content: "Gentle Start initializes projects in a paused, empty state, waiting for user instructions." },
+      { property: "og:description", content: "Gentle Start initializes projects in a paused, empty state, waiting for user instructions." },
+      { name: "twitter:description", content: "Gentle Start initializes projects in a paused, empty state, waiting for user instructions." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8997acc9-81ca-4318-9f9b-5aafaeb20bb8/id-preview-c6fbc75a--65200061-8aab-47e6-bea1-10ee5ecf13e0.lovable.app-1779869998682.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8997acc9-81ca-4318-9f9b-5aafaeb20bb8/id-preview-c6fbc75a--65200061-8aab-47e6-bea1-10ee5ecf13e0.lovable.app-1779869998682.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
