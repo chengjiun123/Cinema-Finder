@@ -68,7 +68,7 @@ function ResultsPage() {
   }
 
   return (
-    <div className="app-frame pb-16">
+    <main className="app-frame pb-16" aria-label="Cinema results">
       <ResultsHeader
         backSearch={{ movies: search.movies }}
         locationStatus={status}
@@ -98,14 +98,14 @@ function ResultsPage() {
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
                 Showing cinemas for
               </p>
-              <p className="text-display truncate text-sm font-semibold">
+              <h2 className="text-display truncate text-sm font-semibold">
                 {activeMovie.title}
-              </p>
+              </h2>
             </div>
           </div>
         )}
 
-        <div className="mt-5">
+        <div className="mt-5" aria-live="polite" aria-busy={isResolving}>
           {isResolving ? (
             <CinemaCardSkeletonList count={5} />
           ) : activeGroup ? (
@@ -113,7 +113,7 @@ function ResultsPage() {
           ) : null}
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

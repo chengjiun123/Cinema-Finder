@@ -98,11 +98,17 @@ function LandingPage() {
   const hasNoSearchMatches = isSearching && searchResults!.length === 0;
 
   return (
-    <div className="app-frame pb-32">
+    <main className="app-frame pb-32" aria-label="Browse movies">
       <AppHeader />
       <div className="px-5">
         <SearchBar value={query} onChange={handleSearchChange} />
       </div>
+
+      <p className="sr-only" aria-live="polite">
+        {selectedIds.size === 0
+          ? "No movies selected"
+          : `${selectedIds.size} ${selectedIds.size === 1 ? "movie" : "movies"} selected`}
+      </p>
 
       {isSearching ? (
         hasNoSearchMatches ? (
@@ -146,7 +152,7 @@ function LandingPage() {
       <div className="px-5">
         <FindCinemasFab count={selectedIds.size} onClick={handleFindCinemas} />
       </div>
-    </div>
+    </main>
   );
 }
 
