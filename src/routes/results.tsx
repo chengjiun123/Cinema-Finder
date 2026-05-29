@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
@@ -10,9 +11,9 @@ import { CinemaCardSkeletonList } from "@/components/results/cinema-card-skeleto
 import { useUserLocation } from "@/hooks/use-user-location";
 import {
   getCinemasForMovies,
-  getMoviesByIds,
   type CinemaGroup,
 } from "@/lib/cinema-data";
+import { moviesByIdsQueryOptions } from "@/lib/movies-queries";
 
 const resultsSearchSchema = z.object({
   movies: fallback(z.string(), "").default(""),
@@ -30,6 +31,13 @@ export const Route = createFileRoute("/results")({
       },
     ],
   }),
+  errorComponent: ({ error }) => (
+    <div className="app-frame px-5 py-10 text-center" role="alert">
+      <p className="text-display text-lg font-semibold">Couldn't load results</p>
+      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+    </div>
+  ),
+  notFoundComponent: () => <EmptyResults />,
   component: ResultsPage,
 });
 
@@ -41,7 +49,8 @@ function parseMovieIds(raw: string): string[] {
 function ResultsPage() {
   const search = Route.useSearch();
   const movieIds = useMemo(() => parseMovieIds(search.movies), [search.movies]);
-  const movies = useMemo(() => getMoviesByIds(movieIds), [movieIds]);
+  const { data: moviesData } = useQuery(moviesByIdsQueryOptions(movieIds));
+  const movies = moviesData ?? [];
 
   const { location, status, isFallback, request } = useUserLocation(true);
 
