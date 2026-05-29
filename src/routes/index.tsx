@@ -1,4 +1,5 @@
 import { createFileRoute, stripSearchParams, useNavigate } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { useMemo } from "react";
 import { z } from "zod";
@@ -8,7 +9,8 @@ import { AppHeader } from "@/components/landing/app-header";
 import { FindCinemasFab } from "@/components/landing/find-cinemas-fab";
 import { MovieRow } from "@/components/landing/movie-row";
 import { SearchBar } from "@/components/landing/search-bar";
-import { getMovies, getMoviesByCategory } from "@/lib/cinema-data";
+import { moviesByCategoryQueryOptions } from "@/lib/movies-queries";
+import type { Movie } from "@/lib/cinema-data";
 
 const INDEX_DEFAULTS = { movies: "", q: "" } as const;
 
@@ -22,6 +24,8 @@ export const Route = createFileRoute("/")({
   search: {
     middlewares: [stripSearchParams(INDEX_DEFAULTS)],
   },
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(moviesByCategoryQueryOptions()),
   head: () => ({
     meta: [
       { title: "Cinema Finder — Pick your movies" },
@@ -38,6 +42,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  errorComponent: ({ error }) => (
+    <div className="app-frame px-5 py-10 text-center" role="alert">
+      <p className="text-display text-lg font-semibold">Couldn't load movies</p>
+      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+    </div>
+  ),
+  notFoundComponent: () => <div className="px-5 py-10">No movies yet.</div>,
   component: LandingPage,
 });
 
@@ -57,14 +68,30 @@ function LandingPage() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
 
+  const { data: categories } = useSuspenseQuery(moviesByCategoryQueryOptions());
+
   const selectedIds = useMemo(() => new Set(parseMovieIds(search.movies)), [search.movies]);
   const query = search.q;
 
-  const categories = useMemo(() => getMoviesByCategory(), []);
-  const searchResults = useMemo(
-    () => (query.trim() ? getMovies({ search: query }) : null),
-    [query],
+  const allMovies = useMemo<Movie[]>(
+    () => [...categories.now_showing, ...categories.popular, ...categories.coming_soon],
+    [categories],
   );
+
+  const searchResults = useMemo<Movie[] | null>(() => {
+    const needle = query.trim().toLowerCase();
+    if (!needle) return null;
+    const seen = new Set<string>();
+    const out: Movie[] = [];
+    for (const m of allMovies) {
+      if (seen.has(m.id)) continue;
+      if (m.title.toLowerCase().includes(needle)) {
+        seen.add(m.id);
+        out.push(m);
+      }
+    }
+    return out;
+  }, [query, allMovies]);
 
   type IndexSearch = z.infer<typeof indexSearchSchema>;
 
@@ -96,6 +123,7 @@ function LandingPage() {
 
   const isSearching = searchResults !== null;
   const hasNoSearchMatches = isSearching && searchResults!.length === 0;
+  const hasAnyMovies = allMovies.length > 0;
 
   return (
     <main className="app-frame pb-32" aria-label="Browse movies">
@@ -110,7 +138,9 @@ function LandingPage() {
           : `${selectedIds.size} ${selectedIds.size === 1 ? "movie" : "movies"} selected`}
       </p>
 
-      {isSearching ? (
+      {!hasAnyMovies ? (
+        <EmptyCatalogState />
+      ) : isSearching ? (
         hasNoSearchMatches ? (
           <EmptySearchState
             onShowPopular={() => {
@@ -170,6 +200,21 @@ function EmptySearchState({ onShowPopular }: { onShowPopular: () => void }) {
       >
         Show popular movies
       </button>
+    </div>
+  );
+}
+
+function EmptyCatalogState() {
+  return (
+    <div className="mt-10 px-5 text-center">
+      <p className="text-display text-lg font-semibold">No movies yet</p>
+      <p className="mt-1.5 text-sm text-muted-foreground">
+        The catalog is empty. Run a sync from{" "}
+        <a className="underline" href="/sync">
+          /sync
+        </a>{" "}
+        to load movies from TMDb.
+      </p>
     </div>
   );
 }
